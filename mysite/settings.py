@@ -25,7 +25,7 @@ SECRET_KEY = 'gza-o&g5iq_l=jtpy@sgtp1g*2cti&t(_wxldam=^c)((@id65'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '.pythonanywhere.com']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'jacob.apparea.dev', '.pythonanywhere.com']
 
 
 # Application definition
