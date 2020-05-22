@@ -12,7 +12,9 @@
             Published: {{ post.published_date }}
         </div>
         <p class="card-text">{{ post.text | markdown | safe | slice:":200" }}</p>
-        <a class="btn btn-primary" href="{% url 'post_detail' pk=post.pk %}">Comments: {{ post.approved_comments.count }}</a>
+        <a class="btn btn-primary" href="{% url 'post_detail' pk=post.pk %}">
+            Comments: <span class="badge badge-light">{{ post.approved_comments.count }}</span>
+        </a>
     </div>
 </div>
 <br>
