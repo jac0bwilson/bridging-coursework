@@ -23,3 +23,14 @@ class Skill(models.Model):
 
     def __str__(self):
         return self.content
+
+class Experience(models.Model):
+    exp_type = models.CharField(max_length=200)
+    more_detail = models.CharField(max_length=200)
+    content = models.TextField()
+
+    def publish(self):
+        self.save()
+
+    def __str__(self):
+        return self.exp_type
