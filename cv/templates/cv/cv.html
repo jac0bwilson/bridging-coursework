@@ -29,6 +29,38 @@
             <h3>
                 Skills
             </h3>
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col">
+                        <div class="card">
+                            <div class="card-header">
+                                Technical
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                {% for skill in skills %}
+                                {% if skill.technical %}
+                                <li class="list-group-item">{{ skill.content }}</li>
+                                {% endif %}
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card">
+                            <div class="card-header">
+                                Other
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                {% for skill in skills %}
+                                {% if not skill.technical %}
+                                <li class="list-group-item">{{ skill.content }}</li>
+                                {% endif %}
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <div class="row justify-content-center">
