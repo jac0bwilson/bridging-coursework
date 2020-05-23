@@ -31,5 +31,21 @@ class NewVisitorTest(unittest.TestCase):
         self.assertTrue(any(title.text == 'Blog' for title in cards))
         self.assertTrue(any(title.text == 'CV' for title in cards))
 
+    def test_cv_page(self):
+        self.browser.get('http://localhost:8000/cv')
+
+        # h1 element with my name
+        name = self.browser.find_element_by_tag_name('h1')
+        self.assertEqual('Jacob Wilson', name.text)
+
+        # sections for education, skills, experience, projects and personal interests 
+        headings = self.browser.find_elements_by_tag_name('h2')
+        self.assertTrue(any(heading.text == 'Education' for heading in headings))
+        self.assertTrue(any(heading.text == 'Skills' for heading in headings))
+        self.assertTrue(any(heading.text == 'Experience' for heading in headings))
+        self.assertTrue(any(heading.text == 'Projects' for heading in headings))
+        self.assertTrue(any(heading.text == 'Personal Interests' for heading in headings))
+        self.fail('Finish the test')
+
 if __name__ == '__main__':
     unittest.main(warnings='ignore')
