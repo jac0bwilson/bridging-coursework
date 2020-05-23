@@ -39,7 +39,7 @@ class NewVisitorTest(unittest.TestCase):
         self.assertEqual('Jacob Wilson', name.text)
 
         # sections for education, skills, experience, projects and personal interests 
-        headings = self.browser.find_elements_by_tag_name('h2')
+        headings = self.browser.find_elements_by_tag_name('h3')
         self.assertTrue(any(heading.text == 'Education' for heading in headings))
         self.assertTrue(any(heading.text == 'Skills' for heading in headings))
         self.assertTrue(any(heading.text == 'Experience' for heading in headings))
