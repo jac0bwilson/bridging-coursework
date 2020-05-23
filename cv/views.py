@@ -14,7 +14,7 @@ def cv_new_education(request):
         if form.is_valid():
             education = form.save(commit=False)
             education.save()
-            return redirect(request, '/cv/')
+            return redirect('/cv/')
     else:
         form = EducationForm()
     return render(request, 'cv/new_education.html', {'form': form})
