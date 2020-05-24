@@ -10,6 +10,7 @@ def cv_page(request):
     experience = Experience.objects.all()
     return render(request, 'cv/cv.html', {'education': education, 'skills': skills, 'experience': experience})
 
+@login_required
 def cv_new_education(request):
     if request.method == 'POST':
         form = EducationForm(request.POST)
@@ -21,6 +22,7 @@ def cv_new_education(request):
         form = EducationForm()
     return render(request, 'cv/new_education.html', {'form': form})
 
+@login_required
 def cv_new_skill(request):
     if request.method == 'POST':
         form = SkillForm(request.POST)
@@ -32,6 +34,7 @@ def cv_new_skill(request):
         form = SkillForm()
     return render(request, 'cv/new_skill.html', {'form': form})
 
+@login_required
 def cv_new_experience(request):
     if request.method == 'POST':
         form = ExperienceForm(request.POST)
