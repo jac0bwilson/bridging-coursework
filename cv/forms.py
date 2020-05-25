@@ -10,7 +10,7 @@ class EducationForm(forms.ModelForm):
 class SkillForm(forms.ModelForm):
     class Meta:
         model = Skill
-        fields = {'technical', 'content'}
+        fields = {'technical', 'content', 'icon'}
 
 class ExperienceForm(forms.ModelForm):
     class Meta:

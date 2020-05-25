@@ -17,6 +17,7 @@ class Education(models.Model):
 class Skill(models.Model):
     technical = models.BooleanField()
     content = models.CharField(max_length=100)
+    icon = models.CharField(max_length=50, null=True, blank=True)
 
     def publish(self):
         self.save()

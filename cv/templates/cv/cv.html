@@ -41,7 +41,14 @@
                             <ul class="list-group list-group-flush">
                                 {% for skill in skills %}
                                 {% if skill.technical %}
-                                <li class="list-group-item">{{ skill.content }}</li>
+                                <li class="list-group-item">
+                                    {{ skill.content }}
+                                    {% if skill.icon %}
+                                    <span class="badge badge-pill badge-secondary">
+                                        <i class="{{ skill.icon }}"></i>
+                                    </span>
+                                    {% endif %}
+                                </li>
                                 {% endif %}
                                 {% endfor %}
                             </ul>
@@ -55,7 +62,14 @@
                             <ul class="list-group list-group-flush">
                                 {% for skill in skills %}
                                 {% if not skill.technical %}
-                                <li class="list-group-item">{{ skill.content }}</li>
+                                <li class="list-group-item">
+                                    {{ skill.content }}
+                                    {% if skill.icon %}
+                                    <span class="badge badge-pill badge-secondary">
+                                        <i class="{{ skill.icon }}"></i>
+                                    </span>
+                                    {% endif %}
+                                </li>
                                 {% endif %}
                                 {% endfor %}
                             </ul>
