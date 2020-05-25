@@ -8,7 +8,16 @@ class NewVisitorTest(unittest.TestCase):
     def setUp(self):  
         self.browser = webdriver.Firefox()
 
-    def tearDown(self):  
+        self.browser.get('http://localhost:8000/accounts/login')
+        username = self.browser.find_element_by_id('id_username')
+        username.send_keys('admin')
+        password = self.browser.find_element_by_id('id_password')
+        password.send_keys('testingAdmin')
+        password.send_keys(Keys.ENTER)
+        time.sleep(1)
+
+    def tearDown(self):
+        self.browser.get('http://localhost:8000/accounts/logout') 
         self.browser.quit()
 
     def test_home_page(self):
@@ -45,7 +54,41 @@ class NewVisitorTest(unittest.TestCase):
         self.assertTrue(any(heading.text == 'Experience' for heading in headings))
         self.assertTrue(any(heading.text == 'Projects' for heading in headings))
         self.assertTrue(any(heading.text == 'Personal Interests' for heading in headings))
-        self.fail('Finish the test')
+
+    def test_cv_add_education(self):
+        self.browser.get('http://localhost:8000/cv/new/education')
+
+        title = 'School of life'
+        subtitle = '2000 - Present'
+        content = 'Doing okay hopefully'
+
+        titleBox = self.browser.find_element_by_id('id_ed_type')
+        subtitleBox = self.browser.find_element_by_id('id_more_detail')
+        contentBox = self.browser.find_element_by_id('id_content')
+        saveButton = self.browser.find_element_by_class_name('save')
+
+        titleBox.send_keys(title)
+        subtitleBox.send_keys(subtitle)
+        contentBox.send_keys(content)
+        saveButton.click()
+        time.sleep(1)
+
+        cards = self.browser.find_elements_by_class_name('card-body')
+        self.assertTrue(any(title in card.text for card in cards))
+        self.assertTrue(any(subtitle in card.text for card in cards))
+        self.assertTrue(any(content in card.text for card in cards))
+
+        for card in cards:
+            if title in card.text:
+                delete = card.find_element_by_tag_name('a')
+                delete.click()
+                time.sleep(1)
+                break
+
+        cards = self.browser.find_elements_by_class_name('card-body')
+        self.assertFalse(any(title in card.text for card in cards))
+        self.assertFalse(any(subtitle in card.text for card in cards))
+        self.assertFalse(any(content in card.text for card in cards))
 
 if __name__ == '__main__':
     unittest.main(warnings='ignore')

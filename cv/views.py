@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 
 from .forms import EducationForm, SkillForm, ExperienceForm, ProjectForm
 from .models import Education, Skill, Experience, Project
@@ -59,3 +59,9 @@ def cv_new_project(request):
     else:
         form = ProjectForm()
     return render(request, 'cv/new_project.html', {'form': form})
+
+@login_required
+def cv_remove_education(request, pk):
+    ed = get_object_or_404(Education, pk=pk)
+    ed.delete()
+    return redirect('cv_page')

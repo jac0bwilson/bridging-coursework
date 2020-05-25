@@ -20,6 +20,9 @@
                     <h5 class="card-title">{{ item.ed_type }}</h5>
                     <h6 class="card-subtitle mb-2 text-muted">{{ item.more_detail }}</h6>
                     <p class="card-text">{{ item.content | linebreaksbr }}</p>
+                    {% if user.is_authenticated %}
+                    <a class="btn btn-default border" href="{% url 'cv_remove_education' pk=item.pk %}"><span class="fas fa-trash-alt"></span></a>
+                    {% endif %}
                 </div>
             </div>  
             {% endfor %}
