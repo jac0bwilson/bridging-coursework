@@ -102,6 +102,14 @@
             <h3>
                 Projects
             </h3>
+            {% for item in projects %}
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{ item.title }}</h5>
+                    <p class="card-text">{{ item.content | markdown | safe }}</p>
+                </div>
+            </div>
+            {% endfor %}
         </div>
     </div>
     <br>
@@ -110,8 +118,16 @@
             <h3>
                 Personal Interests
             </h3>
+            <div class="card">
+                <ul class="list-group list list-group-flush">
+                    <li class="list-group-item">Travel</li>
+                    <li class="list-group-item">Photography</li>
+                    <li class="list-group-item">Formula 1</li>
+                </ul>
+            </div>
         </div>
     </div>
+    <br>
 </div>
 
 {% endblock content %}
