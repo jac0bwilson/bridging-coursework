@@ -34,14 +34,14 @@
             <h3>
                 Skills
             </h3>
-            <div class="container">
+            <div class="container" id="skill-container">
                 <div class="row justify-content-center">
                     <div class="col">
                         <div class="card">
                             <div class="card-header">
                                 Technical
                             </div>
-                            <ul class="list-group list-group-flush">
+                            <ul class="list-group list-group-flush" id="technical-list">
                                 {% for skill in skills %}
                                 {% if skill.technical %}
                                 <li class="list-group-item">
@@ -50,6 +50,9 @@
                                     <span class="badge badge-pill badge-secondary">
                                         <i class="{{ skill.icon }}"></i>
                                     </span>
+                                    {% endif %}
+                                    {% if user.is_authenticated %}
+                                    <a class="btn btn-default border" href="{% url 'cv_remove_skill' pk=skill.pk %}"><span class="fas fa-trash-alt"></span></a>
                                     {% endif %}
                                 </li>
                                 {% endif %}
@@ -62,7 +65,7 @@
                             <div class="card-header">
                                 Other
                             </div>
-                            <ul class="list-group list-group-flush">
+                            <ul class="list-group list-group-flush" id="other-list">
                                 {% for skill in skills %}
                                 {% if not skill.technical %}
                                 <li class="list-group-item">
@@ -71,6 +74,9 @@
                                     <span class="badge badge-pill badge-secondary">
                                         <i class="{{ skill.icon }}"></i>
                                     </span>
+                                    {% endif %}
+                                    {% if user.is_authenticated %}
+                                    <a class="btn btn-default border" href="{% url 'cv_remove_skill' pk=skill.pk %}"><span class="fas fa-trash-alt"></span></a>
                                     {% endif %}
                                 </li>
                                 {% endif %}

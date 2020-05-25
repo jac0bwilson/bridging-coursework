@@ -55,40 +55,81 @@ class NewVisitorTest(unittest.TestCase):
         self.assertTrue(any(heading.text == 'Projects' for heading in headings))
         self.assertTrue(any(heading.text == 'Personal Interests' for heading in headings))
 
-    def test_cv_add_education(self):
+    def test_cv_education(self):
         self.browser.get('http://localhost:8000/cv/new/education')
 
+        # content to test
         title = 'School of life'
         subtitle = '2000 - Present'
         content = 'Doing okay hopefully'
 
+        # find the submission elements
         titleBox = self.browser.find_element_by_id('id_ed_type')
         subtitleBox = self.browser.find_element_by_id('id_more_detail')
         contentBox = self.browser.find_element_by_id('id_content')
         saveButton = self.browser.find_element_by_class_name('save')
 
+        # submit the content
         titleBox.send_keys(title)
         subtitleBox.send_keys(subtitle)
         contentBox.send_keys(content)
         saveButton.click()
         time.sleep(1)
 
+        # check to see if content has been uploaded
         cards = self.browser.find_elements_by_class_name('card-body')
         self.assertTrue(any(title in card.text for card in cards))
         self.assertTrue(any(subtitle in card.text for card in cards))
         self.assertTrue(any(content in card.text for card in cards))
 
+        # delete the inserted element
         for card in cards:
             if title in card.text:
                 delete = card.find_element_by_tag_name('a')
                 delete.click()
                 time.sleep(1)
                 break
-
+        
+        # check that the element has been deleted
         cards = self.browser.find_elements_by_class_name('card-body')
         self.assertFalse(any(title in card.text for card in cards))
         self.assertFalse(any(subtitle in card.text for card in cards))
         self.assertFalse(any(content in card.text for card in cards))
+
+    def test_cv_skill(self):
+        self.browser.get('http://localhost:8000/cv/new/skill')
+
+        # content to test
+        skill = 'Functional Testing'
+
+        # find the submission elements
+        contentBox = self.browser.find_element_by_id('id_content')
+        techTick = self.browser.find_element_by_id('id_technical')
+        saveButton = self.browser.find_element_by_class_name('save')
+
+        # submit the content
+        contentBox.send_keys(skill)
+        techTick.click()
+        saveButton.click()
+        time.sleep(1)
+        
+        # check to see if the content has been uploaded
+        skillsList = self.browser.find_element_by_id('technical-list')
+        skills = self.browser.find_elements_by_class_name('list-group-item')
+        self.assertTrue(any(skill in item.text for item in skills))
+
+        # delete the inserted skill
+        for item in skills:
+            if skill in item.text:
+                delete = item.find_element_by_tag_name('a')
+                delete.click()
+                time.sleep(1)
+                break
+        
+        # check that the skill has been deleted
+        skillsList = self.browser.find_element_by_id('technical-list')
+        skills = skillsList.find_elements_by_class_name('list-group-item')
+        self.assertFalse(any(skill in item.text for item in skills))
 
 if __name__ == '__main__':
     unittest.main(warnings='ignore')

@@ -65,3 +65,9 @@ def cv_remove_education(request, pk):
     ed = get_object_or_404(Education, pk=pk)
     ed.delete()
     return redirect('cv_page')
+
+@login_required
+def cv_remove_skill(request, pk):
+    skill = get_object_or_404(Skill, pk=pk)
+    skill.delete()
+    return redirect('cv_page')
