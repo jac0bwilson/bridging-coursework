@@ -9,4 +9,6 @@ urlpatterns = [
     path('new/project', views.cv_new_project, name='cv_new_project'),
     path('remove/education/<int:pk>', views.cv_remove_education, name='cv_remove_education'),
     path('remove/skill/<int:pk>', views.cv_remove_skill, name='cv_remove_skill'),
+    path('remove/experience/<int:pk>', views.cv_remove_experience, name='cv_remove_experience'),
+    path('remove/project/<int:pk>', views.cv_remove_project, name='cv_remove_project'),
 ]

@@ -71,3 +71,15 @@ def cv_remove_skill(request, pk):
     skill = get_object_or_404(Skill, pk=pk)
     skill.delete()
     return redirect('cv_page')
+
+@login_required
+def cv_remove_experience(request, pk):
+    exp = get_object_or_404(Experience, pk=pk)
+    exp.delete()
+    return redirect('cv_page')
+
+@login_required
+def cv_remove_project(request, pk):
+    project = get_object_or_404(Project, pk=pk)
+    project.delete()
+    return redirect('cv_page')

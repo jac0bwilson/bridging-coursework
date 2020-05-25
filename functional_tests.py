@@ -131,5 +131,82 @@ class NewVisitorTest(unittest.TestCase):
         skills = skillsList.find_elements_by_class_name('list-group-item')
         self.assertFalse(any(skill in item.text for item in skills))
 
+    def test_cv_experience(self):
+        self.browser.get('http://localhost:8000/cv/new/experience')
+
+        # content to test
+        title = 'Life'
+        subtitle = 'Permanent role - 2000-Present'
+        content = 'Just the usual'
+
+        # find the submission elements
+        titleBox = self.browser.find_element_by_id('id_exp_type')
+        subtitleBox = self.browser.find_element_by_id('id_more_detail')
+        contentBox = self.browser.find_element_by_id('id_content')
+        saveButton = self.browser.find_element_by_class_name('save')
+
+        # submit the content
+        titleBox.send_keys(title)
+        subtitleBox.send_keys(subtitle)
+        contentBox.send_keys(content)
+        saveButton.click()
+        time.sleep(1)
+
+        # check to see if content has been uploaded
+        cards = self.browser.find_elements_by_class_name('card-body')
+        self.assertTrue(any(title in card.text for card in cards))
+        self.assertTrue(any(subtitle in card.text for card in cards))
+        self.assertTrue(any(content in card.text for card in cards))
+
+        # delete the inserted element
+        for card in cards:
+            if title in card.text:
+                delete = card.find_element_by_tag_name('a')
+                delete.click()
+                time.sleep(1)
+                break
+        
+        # check that the element has been deleted
+        cards = self.browser.find_elements_by_class_name('card-body')
+        self.assertFalse(any(title in card.text for card in cards))
+        self.assertFalse(any(subtitle in card.text for card in cards))
+        self.assertFalse(any(content in card.text for card in cards))
+
+    def test_cv_project(self):
+        self.browser.get('http://localhost:8000/cv/new/project')
+
+        # content to test
+        title = 'This site'
+        content = 'Developing and blog and CV website'
+
+        # find the submission elements
+        titleBox = self.browser.find_element_by_id('id_title')
+        contentBox = self.browser.find_element_by_id('id_content')
+        saveButton = self.browser.find_element_by_class_name('save')
+
+        # submit the content
+        titleBox.send_keys(title)
+        contentBox.send_keys(content)
+        saveButton.click()
+        time.sleep(1)
+
+        # check to see if content has been uploaded
+        cards = self.browser.find_elements_by_class_name('card-body')
+        self.assertTrue(any(title in card.text for card in cards))
+        self.assertTrue(any(content in card.text for card in cards))
+
+        # delete the inserted element
+        for card in cards:
+            if title in card.text:
+                delete = card.find_element_by_tag_name('a')
+                delete.click()
+                time.sleep(1)
+                break
+        
+        # check that the element has been deleted
+        cards = self.browser.find_elements_by_class_name('card-body')
+        self.assertFalse(any(title in card.text for card in cards))
+        self.assertFalse(any(content in card.text for card in cards))
+
 if __name__ == '__main__':
     unittest.main(warnings='ignore')
