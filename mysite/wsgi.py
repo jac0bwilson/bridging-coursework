@@ -15,7 +15,7 @@ from django.core.wsgi import get_wsgi_application
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'mysite.settings')
 
-project_folder = os.path.expanduser('~/bridging-coursework')
+project_folder = os.path.expanduser('./..')
 load_dotenv(os.path.join(project_folder, '.env'))
 
 application = get_wsgi_application()
