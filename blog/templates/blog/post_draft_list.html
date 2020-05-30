@@ -11,7 +11,7 @@
         <div class="card-title">
             Created: {{ post.created_date | date:'d-m-Y' }}
         </div>
-        <p class="card-text">{{ post.text | markdown | safe | slice:":200" }}</p>
+        <p class="card-text">{{ post.text | truncatechars:200 | markdown | safe }}</p>
     </div>
 </div>
 <br>
